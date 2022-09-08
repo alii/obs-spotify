@@ -4,6 +4,7 @@ import { useLanyardWs } from "use-lanyard";
 import { RotateLoader } from "react-spinners";
 import { useThrottle } from "../hooks/throttle";
 import { Centered } from "../layouts/centered";
+import { useEffect, useState } from "react";
 
 interface Props {
 	userId: string;
@@ -11,6 +12,17 @@ interface Props {
 
 function IndexPage(props: Props) {
 	const data = useThrottle(useLanyardWs(props.userId));
+	const [, rerender] = useState({});
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			rerender({});
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	}, []);
 
 	if (!data) {
 		// Loading state
