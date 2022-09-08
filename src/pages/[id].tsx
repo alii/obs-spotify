@@ -55,7 +55,9 @@ function IndexPage(props: Props) {
 
 					<div className="pr-6">
 						<div className="w-full rounded-full h-3 bg-white/50">
-							<div className="bg-white/50 h-3 rounded-full" style={{ width: `${progress}%` }}></div>
+							<div
+								className="bg-white/50 h-3 rounded-full transition-all ease-linear will-change-[width] duration-1000"
+								style={{ width: `${progress}%` }}></div>
 						</div>
 					</div>
 				</div>
