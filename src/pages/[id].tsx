@@ -25,16 +25,27 @@ function IndexPage(props: Props) {
 		return null;
 	}
 
+	const total = data.spotify.timestamps.end - data.spotify.timestamps.start;
+	const progress = 100 - (100 * (data.spotify.timestamps.end - new Date().getTime())) / total;
+
 	return (
 		<div className="w-full p-1 h-full">
-			<div className="flex space-x-8 bg-black/50 p-4 rounded-xl h-full">
+			<div className="flex space-x-8 bg-black/60 border-2 border-neutral-800 p-4 rounded-xl h-full">
 				<div className="flex-shrink-0">
 					<img src={data.spotify.album_art_url} className="h-full aspect-square rounded-xl" />
 				</div>
 
-				<div className="flex flex-col justify-center space-y-2">
-					<div className="text-5xl font-bold">{data.spotify.song}</div>
-					<div className="text-3xl">{data.spotify.artist}</div>
+				<div className="flex flex-col justify-center space-y-4 w-full">
+					<div className="space-y-2">
+						<p className="text-5xl font-bold truncate w-full">{data.spotify.song}</p>
+						<p className="text-3xl">{data.spotify.artist}</p>
+					</div>
+
+					<div className="pr-6">
+						<div className="w-full rounded-full h-3 bg-white/50">
+							<div className="bg-white/50 h-3 rounded-full" style={{ width: `${progress}%` }}></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
